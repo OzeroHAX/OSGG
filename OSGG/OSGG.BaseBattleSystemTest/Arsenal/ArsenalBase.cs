@@ -79,19 +79,19 @@ namespace OSGG.BaseBattleSystemTest.Arsenal
             => CurrentSheild >= damagePower;
 
         private void UpdateCurrentSheildLowDamage(float damagePower)
-        {
-            UpdateCurrentSheildFromFunc(() => damagePower / 10);
+        { 
+            UpdateCurrentSheild(damagePower / 10);
         }
 
         private void UpdateCurrentSheildHightDamage(float residueDamage)
         {
-            UpdateCurrentSheildFromFunc(() => residueDamage / 2);
+            UpdateCurrentSheild(residueDamage / 2);
         }
 
-        private void UpdateCurrentSheildFromFunc(Func<float> currentSheildCalculateFunc)
+        private void UpdateCurrentSheild(float sheildLossPower)
         {
             if (CurrentSheild == 0) return;
-            CurrentSheild -= currentSheildCalculateFunc();
+            CurrentSheild -= sheildLossPower;
             if (CurrentSheild < 0) CurrentSheild = 0;
         }
 

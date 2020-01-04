@@ -60,7 +60,7 @@ namespace OSGG.BaseBattleSystemTest.Arsenal
             
             if (IsDestroy) return;
 
-            if (!IsSheildBroken(damagePower))
+            if (!IsSheildWillBroken(damagePower))
             {
                 ApplySheildLowDamage(damagePower);
                 return;
@@ -75,7 +75,8 @@ namespace OSGG.BaseBattleSystemTest.Arsenal
             ApplyShoutPowerDowngrade();
         }
 
-        private bool IsSheildBroken(float damagePower)
+        #region SupportsMethodsForGetDamage
+        private bool IsSheildWillBroken(float damagePower)
             => CurrentSheild >= damagePower;
 
         private void ApplySheildLowDamage(float damagePower)
@@ -112,6 +113,9 @@ namespace OSGG.BaseBattleSystemTest.Arsenal
         }
         private bool IsCurrentArmorLow()
             => CurrentArmor / ArmorPower * 100 < 20;
+        #endregion
+
+
 
     }
 }

@@ -4,3 +4,4 @@ obj/
 /packages/
 .idea/*
 .vs/*
+/OSGG/.vs/OSGG/v16/Server/sqlite3

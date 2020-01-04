@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace OSGG.BaseBattleSystemTest.Arsenal
@@ -79,15 +80,18 @@ namespace OSGG.BaseBattleSystemTest.Arsenal
 
         private void UpdateCurrentSheildLowDamage(float damagePower)
         {
-            if (CurrentSheild == 0) return;
-            CurrentSheild -= damagePower / 10;
-            if (CurrentSheild < 0) CurrentSheild = 0;
+            UpdateCurrentSheildFromFunc(() => damagePower / 10);
         }
 
         private void UpdateCurrentSheildHightDamage(float residueDamage)
         {
+            UpdateCurrentSheildFromFunc(() => residueDamage / 2);
+        }
+
+        private void UpdateCurrentSheildFromFunc(Func<float> currentSheildCalculateFunc)
+        {
             if (CurrentSheild == 0) return;
-            CurrentSheild -= residueDamage / 2;
+            CurrentSheild -= currentSheildCalculateFunc();
             if (CurrentSheild < 0) CurrentSheild = 0;
         }
 

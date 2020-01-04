@@ -62,33 +62,33 @@ namespace OSGG.BaseBattleSystemTest.Arsenal
 
             if (IsDamageLow(damagePower))
             {
-                UpdateCurrentSheildLowDamage(damagePower);
+                ApplySheildLowDamage(damagePower);
                 return;
             }
 
             float residueDamage = CalculateResidueDamage(damagePower);
 
-            UpdateCurrentSheildHightDamage(residueDamage);
+            ApplySheildHightDamage(residueDamage);
 
-            UpdateCurrentArmor(residueDamage);
+            ApplyArmorDamage(residueDamage);
 
-            UpdateCurrentShoutPower();
+            ApplyShoutPowerDowngrade();
         }
 
         private bool IsDamageLow(float damagePower)
             => CurrentSheild >= damagePower;
 
-        private void UpdateCurrentSheildLowDamage(float damagePower)
-        { 
-            UpdateCurrentSheild(damagePower / 10);
-        }
-
-        private void UpdateCurrentSheildHightDamage(float residueDamage)
+        private void ApplySheildLowDamage(float damagePower)
         {
-            UpdateCurrentSheild(residueDamage / 2);
+            ApplySheildDamage(damagePower / 10);
         }
 
-        private void UpdateCurrentSheild(float sheildLossPower)
+        private void ApplySheildHightDamage(float residueDamage)
+        {
+            ApplySheildDamage(residueDamage / 2);
+        }
+
+        private void ApplySheildDamage(float sheildLossPower)
         {
             if (CurrentSheild == 0) return;
             CurrentSheild -= sheildLossPower;
@@ -98,12 +98,12 @@ namespace OSGG.BaseBattleSystemTest.Arsenal
         private float CalculateResidueDamage(float damagePower)
             => damagePower - CurrentSheild;
 
-        private void UpdateCurrentArmor(float residueDamage)
+        private void ApplyArmorDamage(float residueDamage)
         {
             CurrentArmor -= residueDamage;
         }
 
-        private void UpdateCurrentShoutPower()
+        private void ApplyShoutPowerDowngrade()
         {
             if (IsCurrentArmorLow())
             {
